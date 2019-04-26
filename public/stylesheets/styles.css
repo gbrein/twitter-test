@@ -1,0 +1,29 @@
+.col1 {
+  background-image: url(/images/twitter-background.jpg);
+  height: 100%;
+  width: 100%;
+  background-size: 100% 100%;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.col2 {}
+
+.containeer-login {
+  margin: 30%;
+
+}
+
+.logo {
+  
+  height: 10%;
+}
+
+.btn {
+  color: white;
+}

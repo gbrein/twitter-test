@@ -1,0 +1,40 @@
+{
+  "name": "desafio-twitter",
+  "version": "1.0.0",
+  "description": "Neste projeto, você deverá entregar um site de gerenciamento de twits. A fonte de dados será o site do `Twitter`.",
+  "main": "app.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www",
+    "dev": "DEBUG=aula-auth:* nodemon ..app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ironhack-web-pt-sao-paulo-fev-2019/desafio-twitter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ironhack-web-pt-sao-paulo-fev-2019/desafio-twitter/issues"
+  },
+  "homepage": "https://github.com/ironhack-web-pt-sao-paulo-fev-2019/desafio-twitter#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "hbs": "^4.0.4",
+    "mongoose": "^5.5.2",
+    "mongoose-findorcreate": "^3.0.0",
+    "node-twitter-api": "^1.8.0",
+    "nodemon": "^1.18.11",
+    "passport": "^0.4.0",
+    "passport-twitter": "^1.0.4",
+    "twitter": "^1.7.1"
+  }
+}
