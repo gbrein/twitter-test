@@ -53,20 +53,38 @@ app.use(passport.session());
 passport.use(new TwitterStrategy({
     consumerKey: dotEnv.parsed.consumerKey,
     consumerSecret: dotEnv.parsed.consumerSecret,
-    callbackURL: "http://127.0.0.1:3000/loged"
+    callbackURL: "http://127.0.0.1:3000/login/callback"
   },
   function (req, token, tokenSecret, profile, done) {
-    console.log(profile);
-    userModel.findOrCreate({
-      username: profile.username
-    }, function (err, user) {
-      if (err) {
-        return done(err);
+    userModel.findOne({
+      twitterId: profile.id
+    }).then((currentUser) => {
+      if (currentUser) {
+        console.log(`User is: ${currentUser}`);
+        done(null, currentUser);
+      } else {
+        new userModel({
+          username: profile.username,
+          twitterID: profile.id,
+          name: profile.displayName,
+          thumbnail: profile.photos[0].value
+        }).save().then((newUser) => {
+          console.log('new user created:' + newUser);
+          done(null, newUser);
+        })
       }
-      done(null, user);
-    }).then(data => console.log('teste'));
+    })
   }
 ));
+
+passport.serializeUser(function (user, done) {
+  done(null, user);
+})
+passport.deserializeUser(function (id, done) {
+  userModel.findById(id).then((user) => {
+    done(null, user);
+  })
+})
 
 app.get('/', (request, response) => {
   response.render('index');
@@ -77,8 +95,14 @@ app.get('/login', (request, response) => {
 });
 
 app.get('/loged', (request, response) => {
+  console.log(request.session)
   response.render('loged');
 });
+
+app.get('/logout', (request, response) => {
+  request.logout();
+  response.redirect('/');
+})
 
 app.get('/login/twitter', passport.authenticate('twitter'));
 
